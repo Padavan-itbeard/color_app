@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import '../style/star.css';
+import '../style/stars.css';
 
 
 const Star = ({ selected = false, onClick = () => { } }) => (

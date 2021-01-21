@@ -1,36 +1,7 @@
 // import React, { Component } from 'react'
-import React, { useRef } from 'react'
-
-// export default class AddColorForm extends Component {
-//   constructor(props) {
-//     super(props);
-
-//     this._title = React.createRef();
-//     this._color = React.createRef();
-
-//     this.submit = this.submit.bind(this);
-//   }
-
-//   submit(e) {
-//     e.preventDefault();
-
-//     const { _title: { current: title }, _color: { current: color} } = this;
-//     alert(`New Color ${ title.value } ${ color.value }`);
-//     title.value = '';
-//     color.value = '#000000';
-//     title.focus();
-//   }
-
-//   render() {
-//     return (
-//       <form onSubmit={this.submit}>
-//         <input ref={this._title} type="text" placeholder="color title..." required/>
-//         <input ref={this._color} type="color" required/>
-//         <button>ADD</button>
-//       </form>
-//     )
-//   }
-// }
+import React, { useRef } from 'react';
+import propTypes from 'prop-types';
+import { css } from '@emotion/react';
 
 
 const AddColorForm = ({ onNewColor = () => { } }) => {
@@ -44,19 +15,38 @@ const AddColorForm = ({ onNewColor = () => { } }) => {
     let _title = title.current;
     let _color = color.current;
 
-    onNewColor(_title, _color);
+    onNewColor(_title.value, _color.value);
     _title.value = '';
     _color.value = '#000000';
     _title.focus();
   }
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit}
+      css={css`
+          display: flex;
+          justify-content: space-around;
+          margin: 0.25em;
+          button {
+            margin: 0.25em;
+          }
+          input {
+            margin: 0.25em;
+            &:first-of-type {
+              flex: 1;
+            }
+          }
+      `}
+    >
       <input ref={title} type="text" placeholder="color title..." required />
       <input ref={color} type="color" required />
-      <button>ADD</button>
-    </form>
+      <button >ADD</button>
+    </form >
   )
+}
+
+AddColorForm.propTypes = {
+  onNewColor: propTypes.func,
 }
 
 export default AddColorForm;

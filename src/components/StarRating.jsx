@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Star from './Star';
-
+import { css } from '@emotion/react';
 
 export default class StarRating extends Component {
   constructor(props) {
@@ -23,15 +23,31 @@ export default class StarRating extends Component {
     const { starsSelected } = this.state;
 
     return (
-      <div className="star-rating">
-        {
-          [...Array(totalStars)].map((n, i) =>
-            <Star key={i}
-              selected={i < starsSelected}
-              onClick={() => this.change(i + 1)}
-            />
-          )
-        }
+      <div 
+      css={css`
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5em;
+      p {
+        margin: 0;
+      }
+    `}
+      >
+        <div>
+          {
+            [...Array(totalStars)].map((n, i) =>
+              <Star key={i}
+                selected={i < starsSelected}
+                onClick={() => this.change(i + 1)}
+              />
+            )
+          }
+        </div>
+        <p>
+          {starsSelected} of {totalStars} stars
+        </p>
       </div>
     )
   }
